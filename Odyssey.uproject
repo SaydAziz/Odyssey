@@ -40,6 +40,18 @@
 				"Linux",
 				"Android"
 			]
+		},
+		{
+			"Name": "LiveLinkXR",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Linux"
+			]
+		},
+		{
+			"Name": "XRVisualization",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
