@@ -11,20 +11,19 @@ ACartridgeDock::ACartridgeDock()
 
 	RailPoint = CreateDefaultSubobject<USceneComponent>(TEXT("RailPoint"));
 	RailTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("RailTrigger"));
-	CustomPlane = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CustomPlane"));
 
-	RootComponent = RailPoint;
-	RailTrigger->SetupAttachment(RailPoint);
+	RootComponent = RailTrigger;
+	RailPoint->SetupAttachment(RailTrigger);
 
 	RailTrigger->SetGenerateOverlapEvents(true);
-	RailTrigger->OnComponentBeginOverlap.AddDynamic(this, &ACartridgeDock::BeginOverlap);
 }
 
 // Called when the game starts or when spawned
 void ACartridgeDock::BeginPlay()
 {
+	RailTrigger->OnComponentBeginOverlap.AddDynamic(this, &ACartridgeDock::BeginOverlap);
+	RailTrigger->OnComponentEndOverlap.AddDynamic(this, &ACartridgeDock::OnOverlapEnd);
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -38,29 +37,45 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	FBodyInstance* BodyInstance = OtherComp->GetBodyInstance();
 	if (BodyInstance)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, BodyInstance->GetBodyDebugName());
 
-		// Define the parameters of the custom plane
-		FVector CustomPlaneNormal = CustomPlane->GetForwardVector(); // Normal vector of the custom plane
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
-		// Set the DOF mode to CustomPlane
-		BodyInstance->DOFMode = EDOFMode::CustomPlane;
+		OtherActor->SetActorRotation(FQuat::Identity);
+		OtherActor->SetActorLocation(RailPoint->GetComponentLocation());
 
-		// Set the parameters of the custom plane
-		BodyInstance->CustomDOFPlaneNormal = CustomPlaneNormal;
+		OtherComp->GetBodyInstance()->bLockXRotation = true;
+		OtherComp->GetBodyInstance()->bLockYRotation = true;
+		OtherComp->GetBodyInstance()->bLockZRotation = true;
 
-		OtherComp->BodyInstance.CreateDOFLock();
+		OtherComp->GetBodyInstance()->bLockXTranslation = true;
+		OtherComp->GetBodyInstance()->bLockZTranslation = true;
+
+		OtherComp->BodyInstance.SetDOFLock(EDOFMode::SixDOF);
 	}
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
-	//OtherComp->GetBodyInstance()->bLockRotation = true;
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, BodyInstance->GetBodyDebugName());
+	//Define the parameters of the custom plane
+	//FVector CustomPlaneNormal = CustomPlane->GetForwardVector(); // Normal vector of the custom plane
 
-	//OtherComp->GetBodyInstance()->bLockXTranslation = true;
-	//OtherComp->GetBodyInstance()->bLockZTranslation = true;
+	//Set the DOF mode to CustomPlane
+	//BodyInstance->DOFMode = EDOFMode::CustomPlane;
+
+	// Set the parameters of the custom plane
+	//BodyInstance->CustomDOFPlaneNormal = CustomPlaneNormal;
 }
 
 void ACartridgeDock::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"));
+
+		OtherComp->GetBodyInstance()->bLockXRotation = false;
+		OtherComp->GetBodyInstance()->bLockYRotation = false;
+		OtherComp->GetBodyInstance()->bLockZRotation = false;
+
+		OtherComp->GetBodyInstance()->bLockXTranslation = false;
+		OtherComp->GetBodyInstance()->bLockZTranslation = false;
+
+		OtherComp->BodyInstance.SetDOFLock(EDOFMode::None);
 }
 
 

@@ -30,9 +30,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBoxComponent* RailTrigger;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UStaticMeshComponent* CustomPlane;
-
     UFUNCTION( )
     void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
                       AActor* OtherActor, 
