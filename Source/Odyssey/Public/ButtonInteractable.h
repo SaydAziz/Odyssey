@@ -38,8 +38,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float ButtonOffset;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int ButtonID;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 ButtonID;
 
 private:
 	FVector RelativeLoc;

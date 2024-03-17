@@ -2,6 +2,7 @@
 
 
 #include "Kismet/KismetSystemLibrary.h"
+#include "MissionManager.h"
 #include "ButtonInteractable.h"
 
 
@@ -39,6 +40,9 @@ void AButtonInteractable::BeginPlay()
 	
 	PressCheck->OnComponentBeginOverlap.AddDynamic(this, &AButtonInteractable::BeginOverlap);
 	PressCheck->OnComponentEndOverlap.AddDynamic(this, &AButtonInteractable::OnOverlapEnd);
+
+	UMissionManager* missions = GetWorld()->GetSubsystem<UMissionManager>();
+	missions->BindToEvent(this);
 }
 
 // Called every frame
