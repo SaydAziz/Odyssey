@@ -66,8 +66,6 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 void ACartridgeDock::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"));
-
 		OtherComp->GetBodyInstance()->bLockXRotation = false;
 		OtherComp->GetBodyInstance()->bLockYRotation = false;
 		OtherComp->GetBodyInstance()->bLockZRotation = false;

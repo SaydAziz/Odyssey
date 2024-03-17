@@ -4,6 +4,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "ButtonInteractable.h"
 
+
 // Sets default values
 AButtonInteractable::AButtonInteractable()
 {
@@ -13,10 +14,16 @@ AButtonInteractable::AButtonInteractable()
 	ButtonBase = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Button Base"));
 	ButtonPush = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Button Push"));
 	Trigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Button Trigger"));
+	PressCheck = CreateDefaultSubobject<UBoxComponent>(TEXT("Press Check"));
 
 	RootComponent = ButtonBase;
+	PressCheck->SetupAttachment(ButtonBase);
 	ButtonPush->SetupAttachment(ButtonBase);
 	Trigger->SetupAttachment(ButtonPush);
+
+	ButtonID = 0;
+
+	PressCheck->SetGenerateOverlapEvents(true);
 
 	ButtonOffset = 110.f;
 
@@ -30,6 +37,8 @@ void AButtonInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	PressCheck->OnComponentBeginOverlap.AddDynamic(this, &AButtonInteractable::BeginOverlap);
+	PressCheck->OnComponentEndOverlap.AddDynamic(this, &AButtonInteractable::OnOverlapEnd);
 }
 
 // Called every frame
@@ -44,7 +53,6 @@ void AButtonInteractable::Tick(float DeltaTime)
 
 	if (Overlaps.Num() > 0)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("ENTERRRRRRRRRRRRRRRRRRRRRRRRRRRED"));
 		newOffset = RelativeLoc.Z - 20;
 	}
 	else
@@ -57,5 +65,18 @@ void AButtonInteractable::Tick(float DeltaTime)
 	FLatentActionInfo latentInfo;
 	latentInfo.CallbackTarget = ButtonPush;
 	UKismetSystemLibrary::MoveComponentTo(ButtonPush, RelativeLoc, FRotator::ZeroRotator, false, false, 0.0001f, false, EMoveComponentAction::Type::Move, latentInfo);
+}
+
+void AButtonInteractable::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherComp == ButtonPush)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
+		ButtonPressed.Broadcast(ButtonID);
+	}
+}
+
+void AButtonInteractable::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
 }
 

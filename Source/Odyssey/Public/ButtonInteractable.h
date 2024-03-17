@@ -7,6 +7,9 @@
 #include "Components/BoxComponent.h"
 #include "ButtonInteractable.generated.h"
 
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnButtonPressed, int, ButtonID);
+
 UCLASS()
 class ODYSSEY_API AButtonInteractable : public AActor
 {
@@ -29,8 +32,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBoxComponent* Trigger;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBoxComponent* PressCheck;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float ButtonOffset;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int ButtonID;
 
 private:
 	FVector RelativeLoc;
@@ -39,4 +48,19 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FOnButtonPressed ButtonPressed;
+
+    UFUNCTION( )
+    void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
+                      AActor* OtherActor, 
+                      UPrimitiveComponent* OtherComp, 
+                      int32 OtherBodyIndex, 
+                      bool bFromSweep, 
+                      const FHitResult &SweepResult );
+
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex);
 };
