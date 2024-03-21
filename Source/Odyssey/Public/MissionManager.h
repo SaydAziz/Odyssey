@@ -25,7 +25,8 @@ public:
 	
 };
 
-
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMissionChanged, FString, MissionObjective);
 
 /**
  * 
@@ -42,6 +43,9 @@ public:
 
 	UMissionManager();
 
+	UPROPERTY(BlueprintAssignable)
+	FOnMissionChanged MissionChanged;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FMissionBeat> MissionList;
 
@@ -53,7 +57,7 @@ public:
 private:
 
 	UPROPERTY(EditAnywhere)
-	FMissionBeat CurrentMission;
+	int32 CurrentMissionIndex;
 
 	UFUNCTION()
 	void CreateMission(FString Objective, int32 InteractableID);

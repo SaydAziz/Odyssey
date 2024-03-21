@@ -75,7 +75,7 @@ void AButtonInteractable::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherComp == ButtonPush)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
 		ButtonPressed.Broadcast(ButtonID);
 	}
 }
