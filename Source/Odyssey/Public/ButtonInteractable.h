@@ -48,6 +48,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintCallable, BlueprintAssignable)
 	FOnButtonPressed ButtonPressed;
 
     UFUNCTION( )
