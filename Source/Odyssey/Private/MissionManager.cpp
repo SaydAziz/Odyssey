@@ -12,7 +12,7 @@ void UMissionManager::Initialize(FSubsystemCollectionBase& Collection)
 UMissionManager::UMissionManager()
 {
 	CreateMission("Get to communications and fix comms.", 1);
-	CreateMission("Get to the escape pod and get out!", 2);
+	CreateMission("Enter the escape pod and leave the ship.", 2);
 	CreateMission("Get to engine room and replace the battery", 3);
 	 
 
