@@ -9,8 +9,10 @@ ACartridgeInteraction::ACartridgeInteraction()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Casing = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Casing"));
-	Dock = CreateDefaultSubobject<ACartridgeDock>(TEXT("Dock"));
 	SlotTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Slot Trigger"));
+
+	RootComponent = Casing;
+	SlotTrigger->SetupAttachment(RootComponent);
 
 	InteractionID = 0;
 }
