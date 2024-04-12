@@ -21,9 +21,9 @@ UMissionManager::UMissionManager()
 }
 
 
-void UMissionManager::BindToEvent(AButtonInteractable* button)
+void UMissionManager::BindToEvent(AInteractableObject* Interaction)
 {
-	button->ButtonPressed.AddDynamic(this, &UMissionManager::CheckInteracted);
+	Interaction->HasInteracted.AddDynamic(this, &UMissionManager::CheckInteracted);
 }
 
 void UMissionManager::CreateMission(FString Objective, int32 InteractableID)

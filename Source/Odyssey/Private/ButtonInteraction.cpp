@@ -3,11 +3,11 @@
 
 #include "Kismet/KismetSystemLibrary.h"
 #include "MissionManager.h"
-#include "ButtonInteractable.h"
+#include "ButtonInteraction.h"
 
-// Sets default values
-AButtonInteractable::AButtonInteractable()
+AButtonInteraction::AButtonInteraction()
 {
+
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -21,7 +21,7 @@ AButtonInteractable::AButtonInteractable()
 	ButtonPush->SetupAttachment(ButtonBase);
 	Trigger->SetupAttachment(ButtonPush);
 
-	ButtonID = 0;
+	InteractionID = 0;
 
 	PressCheck->SetGenerateOverlapEvents(true);
 
@@ -32,20 +32,16 @@ AButtonInteractable::AButtonInteractable()
 	ButtonPush->SetRelativeLocation(RelativeLoc);
 }
 
-// Called when the game starts or when spawned
-void AButtonInteractable::BeginPlay()
+void AButtonInteraction::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	PressCheck->OnComponentBeginOverlap.AddDynamic(this, &AButtonInteractable::BeginOverlap);
-	PressCheck->OnComponentEndOverlap.AddDynamic(this, &AButtonInteractable::OnOverlapEnd);
+	PressCheck->OnComponentBeginOverlap.AddDynamic(this, &AButtonInteraction::BeginOverlap);
+	PressCheck->OnComponentEndOverlap.AddDynamic(this, &AButtonInteraction::OnOverlapEnd);
 
-	UMissionManager* missions = GetWorld()->GetSubsystem<UMissionManager>();
-	//missions->BindToEvent(this);
 }
 
-// Called every frame
-void AButtonInteractable::Tick(float DeltaTime)
+void AButtonInteraction::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -70,16 +66,15 @@ void AButtonInteractable::Tick(float DeltaTime)
 	UKismetSystemLibrary::MoveComponentTo(ButtonPush, RelativeLoc, FRotator::ZeroRotator, false, false, 0.0001f, false, EMoveComponentAction::Type::Move, latentInfo);
 }
 
-void AButtonInteractable::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AButtonInteraction::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherComp == ButtonPush)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
-		ButtonPressed.Broadcast(ButtonID);
+		HasInteracted.Broadcast(InteractionID);
 	}
 }
 
-void AButtonInteractable::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AButtonInteraction::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 }
-
