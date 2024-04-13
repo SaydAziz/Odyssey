@@ -25,10 +25,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UStaticMeshComponent* Casing; 
+	TArray<UBoxComponent*> SlotTriggerCollection;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ACartridgeDock* Dock; 
+	TMap<UBoxComponent*, bool> SlotTriggerInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* Casing; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBoxComponent* SlotTrigger; 
