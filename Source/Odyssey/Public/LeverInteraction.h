@@ -3,45 +3,48 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "InteractableObject.h"
 #include "Cartridge.h"
 #include "Components/BoxComponent.h"
-#include "CartridgeDock.generated.h"
+#include "PhysicsEngine/PhysicsConstraintComponent.h"
+#include "LeverInteraction.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
-class ODYSSEY_API ACartridgeDock : public AActor
+class ODYSSEY_API ALeverInteraction : public AInteractableObject
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ACartridgeDock();
+
+public: 
+	ALeverInteraction();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
+	
+public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	USceneComponent* RailPoint;
+	UStaticMeshComponent* LeverBase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UBoxComponent* RailTrigger;
+	UPhysicsConstraintComponent* PhysConstraint;
 
-    UFUNCTION()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBoxComponent* LowerTrigger;
+
     void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
                       AActor* OtherActor, 
                       UPrimitiveComponent* OtherComp, 
                       int32 OtherBodyIndex, 
                       bool bFromSweep, 
-                      const FHitResult &SweepResult );
+                      const FHitResult &SweepResult ) override;
 
-	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, 
 		AActor* OtherActor, 
 		UPrimitiveComponent* OtherComp, 
-		int32 OtherBodyIndex);
+		int32 OtherBodyIndex) override;
+
 };

@@ -35,22 +35,27 @@ void ACartridgeDock::Tick(float DeltaTime)
 void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	FBodyInstance* BodyInstance = OtherComp->GetBodyInstance();
-	if (BodyInstance)
+	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, OtherActor->GetClass()->GetName());
+
+	if (OtherActor->IsA(ACartridge::StaticClass()))
 	{
+		if (BodyInstance)
+		{
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
-		OtherActor->SetActorRotation(FQuat::Identity);
-		OtherActor->SetActorLocation(RailPoint->GetComponentLocation());
+			OtherActor->SetActorRotation(FQuat::Identity);
+			OtherActor->SetActorLocation(RailPoint->GetComponentLocation());
 
-		OtherComp->GetBodyInstance()->bLockXRotation = true;
-		OtherComp->GetBodyInstance()->bLockYRotation = true;
-		OtherComp->GetBodyInstance()->bLockZRotation = true;
+			OtherComp->GetBodyInstance()->bLockXRotation = true;
+			OtherComp->GetBodyInstance()->bLockYRotation = true;
+			OtherComp->GetBodyInstance()->bLockZRotation = true;
 
-		OtherComp->GetBodyInstance()->bLockXTranslation = true;
-		OtherComp->GetBodyInstance()->bLockZTranslation = true;
+			OtherComp->GetBodyInstance()->bLockXTranslation = true;
+			OtherComp->GetBodyInstance()->bLockZTranslation = true;
 
-		OtherComp->BodyInstance.SetDOFLock(EDOFMode::SixDOF);
+			OtherComp->BodyInstance.SetDOFLock(EDOFMode::SixDOF);
+		}
 	}
 
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, BodyInstance->GetBodyDebugName());

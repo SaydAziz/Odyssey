@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
-#include "ButtonInteractable.h"
+#include "InteractableObject.h"
 #include "MissionManager.generated.h"
 
 USTRUCT(BlueprintType)
@@ -49,11 +49,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FMissionBeat> MissionList;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<AButtonInteractable*> WatchedButtons;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//TArray<AInteractableObject*> WatchedInteractions;
 	
 	UFUNCTION()
-	void BindToEvent(AButtonInteractable* button);
+	void BindToEvent(AInteractableObject* Interaction);
 private:
 
 	UPROPERTY(EditAnywhere)
