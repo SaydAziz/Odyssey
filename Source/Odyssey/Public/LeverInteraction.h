@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "InteractableObject.h"
 #include "Cartridge.h"
+#include "Components/BoxComponent.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
 #include "LeverInteraction.generated.h"
 
@@ -30,4 +31,20 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UPhysicsConstraintComponent* PhysConstraint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBoxComponent* LowerTrigger;
+
+    void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
+                      AActor* OtherActor, 
+                      UPrimitiveComponent* OtherComp, 
+                      int32 OtherBodyIndex, 
+                      bool bFromSweep, 
+                      const FHitResult &SweepResult ) override;
+
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex) override;
+
 };

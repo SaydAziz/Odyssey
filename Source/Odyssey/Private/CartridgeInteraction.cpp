@@ -44,7 +44,7 @@ void ACartridgeInteraction::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::Red, FString::FromInt(SlotTriggerInfo.Num()));
+	//GEngine->AddOnScreenDebugMessage(0, 1.f, FColor::Red, FString::FromInt(SlotTriggerInfo.Num()));
 }
 
 void ACartridgeInteraction::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
