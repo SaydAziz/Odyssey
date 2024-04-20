@@ -51,8 +51,9 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			OtherComp->GetBodyInstance()->bLockYRotation = true;
 			OtherComp->GetBodyInstance()->bLockZRotation = true;
 
-			OtherComp->GetBodyInstance()->bLockXTranslation = true;
-			OtherComp->GetBodyInstance()->bLockZTranslation = true;
+			OtherComp->GetBodyInstance()->bLockXTranslation = LockX;
+			OtherComp->GetBodyInstance()->bLockYTranslation = LockY;
+			OtherComp->GetBodyInstance()->bLockZTranslation = LockZ;
 
 			OtherComp->BodyInstance.SetDOFLock(EDOFMode::SixDOF);
 		}
