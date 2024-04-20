@@ -24,7 +24,7 @@ UMissionManager::UMissionManager()
 	 
 
 	CurrentMissionIndex = 0;
-	MissionChanged.Broadcast(MissionList[CurrentMissionIndex].MissionObjective);
+	MissionChanged.Broadcast(MissionList[CurrentMissionIndex]);
 }
 
 
@@ -38,7 +38,6 @@ void UMissionManager::CreateMission(FString Objective, int32 InteractableID)
 	FMissionBeat MissionBeat;
 	MissionBeat.MissionObjective = Objective;
 	MissionBeat.RequiredInteractableID = InteractableID;
-
 	MissionList.Add(MissionBeat);
 }
 
@@ -57,6 +56,6 @@ void UMissionManager::CheckInteracted(int32 ID)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("All Missions Have been Complete"));
 		}
-		MissionChanged.Broadcast(MissionList[CurrentMissionIndex].MissionObjective);
+		MissionChanged.Broadcast(MissionList[CurrentMissionIndex]);
 	}
 }
