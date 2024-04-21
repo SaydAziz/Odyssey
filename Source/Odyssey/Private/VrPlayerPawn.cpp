@@ -2,6 +2,7 @@
 
 #include "VrPlayerPawn.h"
 
+
 // Sets default values
 AVrPlayerPawn::AVrPlayerPawn()
 {
@@ -17,6 +18,9 @@ AVrPlayerPawn::AVrPlayerPawn()
 	VROrigin->SetupAttachment(PhysicsRoot);
 	Camera->SetupAttachment(VROrigin);
 	HeadCollision->SetupAttachment(Camera);
+
+
+
 }
 
 // Called when the game starts or when spawned

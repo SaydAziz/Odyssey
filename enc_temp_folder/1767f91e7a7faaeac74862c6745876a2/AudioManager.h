@@ -20,7 +20,7 @@ struct FAudioAmbienceVolume {
 
 UENUM()
 enum class EAmbienceState : uint8 {
-	active UMETA(DIsplayName = "active"), fading UMETA(DIsplayName = "fading"), waitingforfade UMETA(DIsplayName = "waitingforfade")
+	active UMETA(DIsplayName = "Normal"), fading UMETA(DIsplayName = "Critical")
 };
 
 UCLASS()
@@ -58,9 +58,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FAudioAmbienceVolume> AmbienceVolumeList;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AmbienceFadeTime;
-
 	FAudioAmbienceVolume ActiveAmbience;
 
 	bool ExitedActiveAmbienceVolume();
@@ -75,9 +72,6 @@ public:
 
 	bool ambience1Active;
 	void fadeAmbience();
-	void AdjustAmbienceSourceVolumes(UAudioComponent* fadeInComp, UAudioComponent* fadeOutComp);
 
-	FTimerHandle ambienceFadeTimer;
-	void fadeComplete();
 
 };
