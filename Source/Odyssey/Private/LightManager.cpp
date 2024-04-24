@@ -1,10 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "InteractableObject.h"
+
+#include "LightManager.h"
 #include "MissionManager.h"
 
 // Sets default values
-AInteractableObject::AInteractableObject()
+ALightManager::ALightManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,18 +13,22 @@ AInteractableObject::AInteractableObject()
 }
 
 // Called when the game starts or when spawned
-void AInteractableObject::BeginPlay()
+void ALightManager::BeginPlay()
 {
 	Super::BeginPlay();
-
 	UMissionManager* missions = GetWorld()->GetSubsystem<UMissionManager>();
-	missions->BindToEvent(static_cast<AInteractableObject*>(this));
-	
+	missions->MissionChanged.AddDynamic(this, &ALightManager::OnMissionChanged);
 }
 
 // Called every frame
-void AInteractableObject::Tick(float DeltaTime)
+void ALightManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
+
+void ALightManager::OnMissionChanged(FMissionBeat mission)
+{
+	NotifyMissionChanged(mission);
+}
+
