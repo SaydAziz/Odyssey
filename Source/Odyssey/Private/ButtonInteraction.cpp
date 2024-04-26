@@ -1,9 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "ButtonInteraction.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "MissionManager.h"
-#include "ButtonInteraction.h"
+#include "Kismet/GameplayStatics.h"
 
 AButtonInteraction::AButtonInteraction()
 {
@@ -69,6 +70,9 @@ void AButtonInteraction::BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 {
 	if (OtherComp == ButtonPush)
 	{
+		if (ButtonClick != NULL) {
+			UGameplayStatics::PlaySoundAtLocation(this, ButtonClick, GetActorLocation());
+		}
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
 		HasInteracted.Broadcast(InteractionID);
 	}

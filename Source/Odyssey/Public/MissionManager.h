@@ -22,11 +22,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsCompleted;
-	
+
 };
 
 UDELEGATE(BlueprintCallable)
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMissionChanged, FString, MissionObjective);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMissionChanged, FMissionBeat, Mission);
 
 /**
  * 
@@ -54,6 +54,7 @@ public:
 	
 	UFUNCTION()
 	void BindToEvent(AInteractableObject* Interaction);
+
 private:
 
 	UPROPERTY(EditAnywhere)

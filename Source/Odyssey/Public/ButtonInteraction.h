@@ -39,6 +39,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float ButtonOffset;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* ButtonClick;
+
 private:
 	FVector RelativeLoc;
 

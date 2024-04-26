@@ -40,4 +40,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USphereComponent* HeadCollision;
 
+	
 };
