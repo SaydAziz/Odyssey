@@ -55,10 +55,12 @@ public:
 	UFUNCTION()
 	void BindToEvent(AInteractableObject* Interaction);
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 CurrentMissionIndex;
+
 private:
 
-	UPROPERTY(EditAnywhere)
-	int32 CurrentMissionIndex;
+
 
 	UFUNCTION()
 	void CreateMission(FString Objective, int32 InteractableID);
