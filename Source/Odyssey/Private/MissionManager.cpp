@@ -19,6 +19,10 @@ UMissionManager::UMissionManager()
 	CreateMission("Retrieve samples in lab", 6);
 	CreateMission("Take samples to emergency pod and escape", 7);
 	CreateMission("Input coordinates at navigation", 8);
+	CreateMission("Input coordinates at navigation", 8);
+	CreateMission("Input coordinates at navigation", 8);
+	CreateMission("Input coordinates at navigation", 8);
+	CreateMission("Input coordinates at navigation", 8);
 	CreateMission("Take Battery from engine and put in pod", 9);
 	CreateMission("ESCAPE USING THE LAUNCH BUTTON", 10);
 	 

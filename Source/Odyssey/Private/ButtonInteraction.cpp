@@ -75,6 +75,7 @@ void AButtonInteraction::BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 		}
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PRESSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"));
 		HasInteracted.Broadcast(InteractionID);
+		InteractionID = 0;
 	}
 }
 
