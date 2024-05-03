@@ -30,6 +30,7 @@ void ACartridgeDock::BeginPlay()
 void ACartridgeDock::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 }
 
 void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -45,7 +46,7 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
 			OtherActor->SetActorRotation(FQuat::Identity);
-			OtherActor->SetActorLocation(RailPoint->GetComponentLocation());
+			OtherActor->SetActorLocation(FVector(RailPoint->GetComponentLocation().X, OtherActor->GetActorLocation().Y, RailPoint->GetComponentLocation().Z));
 
 			OtherComp->GetBodyInstance()->bLockXRotation = true;
 			OtherComp->GetBodyInstance()->bLockYRotation = true;
@@ -56,6 +57,10 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			OtherComp->GetBodyInstance()->bLockZTranslation = LockZ;
 
 			OtherComp->BodyInstance.SetDOFLock(EDOFMode::SixDOF);
+
+			//OtherComp->GetBodyInstance()->PutInstanceToSleep();
+			//OtherComp->GetBodyInstance()->bSimulatePhysics = false;
+				//SetLinearVelocity(FVector::Zero(), false, true);
 		}
 	}
 

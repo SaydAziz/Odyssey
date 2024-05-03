@@ -27,4 +27,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsInserted;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsInPlace;
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnInsertedNotify();
+	
+	void OnInserted(bool InsertState);
 };

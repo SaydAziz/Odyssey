@@ -36,6 +36,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBoxComponent* SlotTrigger; 
 
+	FTimerHandle PhysicsResetTimer;
+
+	FTimerDelegate PhysicsResetDelegate;
+
+	UFUNCTION()
+	void ResetPhysics(UPrimitiveComponent* Body);
+
     void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
                       AActor* OtherActor, 
                       UPrimitiveComponent* OtherComp, 

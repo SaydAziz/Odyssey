@@ -21,7 +21,19 @@ void ACartridge::BeginPlay()
 // Called every frame
 void ACartridge::Tick(float DeltaTime)
 {
+	GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, TEXT("####" + bIsInserted));
+	if (bIsInPlace)
+	{	
+		GEngine->AddOnScreenDebugMessage(0, 5, FColor::Red, TEXT("TickUpdate"));
+		Cast<UStaticMeshComponent>(GetRootComponent())->GetBodyInstance()->SetLinearVelocity(FVector::Zero(), false, false);
+	}
 	Super::Tick(DeltaTime);
 
+}
+
+void ACartridge::OnInserted(bool InsertState)
+{
+	bIsInPlace = InsertState;
+	OnInsertedNotify();
 }
 
