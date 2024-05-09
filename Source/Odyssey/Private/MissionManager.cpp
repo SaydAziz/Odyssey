@@ -28,7 +28,8 @@ UMissionManager::UMissionManager()
 	CreateMission("Input coordinates at navigation", 8);
 	CreateMission("Take Battery from engine and put in pod", 9);
 	CreateMission("ESCAPE USING THE LAUNCH BUTTON", 10);
-	 
+
+	//creature spawn in on lab sample completion, trigger to make it hide back in engine
 
 	CurrentMissionIndex = 0;
 	MissionChanged.Broadcast(MissionList[CurrentMissionIndex]);
