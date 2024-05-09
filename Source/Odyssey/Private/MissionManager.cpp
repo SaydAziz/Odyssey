@@ -20,14 +20,15 @@ UMissionManager::UMissionManager()
 	CreateMission("Get a replacement battery from storage", 4);
 	CreateMission("Divert power to lab door at breaker room", 5);
 	CreateMission("Retrieve samples in lab", 6);
-	CreateMission("Take samples to emergency pod and escape", 7);
-	CreateMission("Input coordinates at navigation", 8);
-	CreateMission("Input coordinates at navigation", 8);
-	CreateMission("Input coordinates at navigation", 8);
-	CreateMission("Input coordinates at navigation", 8);
-	CreateMission("Input coordinates at navigation", 8);
-	CreateMission("Take Battery from engine and put in pod", 9);
-	CreateMission("ESCAPE USING THE LAUNCH BUTTON", 10);
+	CreateMission("You should see a recorder.", 7);
+	CreateMission("Take samples to emergency pod and escape", 8);
+	CreateMission("Input coordinates at navigation", 9);
+	CreateMission("Input coordinates at navigation", 9);
+	CreateMission("Input coordinates at navigation", 9);
+	CreateMission("Input coordinates at navigation", 9);
+	CreateMission("Input coordinates at navigation", 9);
+	CreateMission("Take Battery from engine and put in pod", 10);
+	CreateMission("ESCAPE USING THE LAUNCH BUTTON", 11);
 
 	//creature spawn in on lab sample completion, trigger to make it hide back in engine
 
