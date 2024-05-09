@@ -45,8 +45,23 @@ void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
-			OtherActor->SetActorRotation(FQuat::Identity);
-			OtherActor->SetActorLocation(FVector(RailPoint->GetComponentLocation().X, OtherActor->GetActorLocation().Y, RailPoint->GetComponentLocation().Z));
+			if (SnapVertical)
+			{
+				OtherActor->SetActorLocation(FVector(RailPoint->GetComponentLocation().X, RailPoint->GetComponentLocation().Y, OtherActor->GetActorLocation().Z));
+			}
+			else
+			{
+				OtherActor->SetActorLocation(FVector(RailPoint->GetComponentLocation().X, OtherActor->GetActorLocation().Y, RailPoint->GetComponentLocation().Z));
+			}
+
+			if (ReverseRotSnap)
+			{
+				OtherActor->SetActorRotation(FRotator(0, 180, 0));
+			}
+			else
+			{
+				OtherActor->SetActorRotation(FRotator(0, 0, 0));
+			}
 
 			OtherComp->GetBodyInstance()->bLockXRotation = true;
 			OtherComp->GetBodyInstance()->bLockYRotation = true;

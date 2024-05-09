@@ -40,6 +40,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool LockZ;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool SnapVertical;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool ReverseRotSnap;
 
     UFUNCTION()
     void BeginOverlap(UPrimitiveComponent* OverlappedComponent, 
