@@ -52,13 +52,13 @@ void AButtonInteraction::Tick(float DeltaTime)
 
 	if (Overlaps.Num() > 0)
 	{
-		newOffset = RelativeLoc.Z - 20;
+		newOffset = RelativeLoc.Z - 2;
 	}
 	else
 	{
-		newOffset = RelativeLoc.Z + 10;
+		newOffset = RelativeLoc.Z + 1;
 	}
-	newOffset = FMath::Clamp(newOffset, -100, ButtonOffset);
+	newOffset = FMath::Clamp(newOffset, -10, ButtonOffset);
 	RelativeLoc.Z = newOffset;
 
 	FLatentActionInfo latentInfo;
