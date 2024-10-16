@@ -36,14 +36,14 @@ void ACartridgeDock::Tick(float DeltaTime)
 void ACartridgeDock::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	FBodyInstance* BodyInstance = OtherComp->GetBodyInstance();
-	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, OtherActor->GetClass()->GetName());
+	//GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, OtherActor->GetClass()->GetName());
 
 	if (OtherActor->IsA(ACartridge::StaticClass()))
 	{
 		if (BodyInstance)
 		{
 
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, OtherComp->GetName());
 
 			if (SnapVertical)
 			{

@@ -48,7 +48,7 @@ void AAudioManager::Tick(float DeltaTime)
 			}
 			break;
 		case EAmbienceState::fading:
-			GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, TEXT("FADINGGGGGGGGGGGGGGGGGGGGGGG"));
+			//GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Blue, TEXT("FADINGGGGGGGGGGGGGGGGGGGGGGG"));
 			fadeAmbience();
 			break;
 		case EAmbienceState::waitingforfade:
